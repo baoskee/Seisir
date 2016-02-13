@@ -107,7 +107,15 @@ void loop() {
     //  Serial.print("\t");
     //  Serial.print(az);
     //  Serial.print("\t");
-    
+    int length = 10; // Modify array length here
+    int XValues[length];
+    int YValues[length];
+    int ZValues[length];
+    for (i = 0; i < length; i += 1) {
+        XValues[i] = ax;
+        YValues[i] = ay;
+        ZValues[i] = az;
+    }
     
     //  Serial.print(gx);
     //  Serial.print("\t");
