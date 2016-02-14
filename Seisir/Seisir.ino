@@ -1,10 +1,13 @@
-#include <LiquidCrystal.h>
 #include <BMI160.h>
 #include <CurieImu.h>
-
+#include <Wire.h>
+#include "rgb_lcd.h"
 #include "CurieImu.h"
 
-LiquidCrystal lcd(12,11,5,4,3,2);
+rgb_lcd lcd; // initialize lcd
+const int colorR = 0;
+const int colorG = 150;
+const int colorB = 0;
 
     
 int16_t ax, ay, az;         // accelerometer values
@@ -17,8 +20,16 @@ const int ledPin = 13;      // activity LED pin
 boolean blinkState = false; // state of the LED
 
 void setup() {
-    lcd.begin(16,2);
-    lcd.clear();
+  
+      // set up LCD's number of columns and rows
+      lcd.begin(8,4);
+     //lcd.setRGB(colorR, colorG, colorB);
+     lcd.print("Hello, World!");
+      delay(100);
+  
+
+
+   
     pinMode(buzzerPin, OUTPUT);
     Serial.begin(9600); // initialize Serial communication
     while (!Serial);    // wait for the serial port to open
@@ -141,8 +152,12 @@ void loop() {
 
         for (i = 0; i < 10; i++) {
             duration = 2 * tempo;  // length of note/rest in ms
-
+              const int colorR = 255;
+              const int colorG = 0;
+              const int colorB = 0;
+             lcd.setRGB(colorR, colorG, colorB);
              lcd.print("SEIZURE DETECTED");
+             delay(1000);
              tone(buzzerPin, 445, 750);
              delay(duration);            // wait for tone to finish
  
