@@ -1,19 +1,24 @@
+#include <LiquidCrystal.h>
 #include <BMI160.h>
 #include <CurieImu.h>
 
 #include "CurieImu.h"
 
+LiquidCrystal lcd(12,11,5,4,3,2);
+
+    
 int16_t ax, ay, az;         // accelerometer values
 int16_t gx, gy, gz;         // gyrometer values
 int tempo = 150;
 const int buzzerPin = 7;
 
-// Philosophy: Minimize false positives
 
 const int ledPin = 13;      // activity LED pin
 boolean blinkState = false; // state of the LED
 
 void setup() {
+    lcd.begin(16,2);
+    lcd.clear();
     pinMode(buzzerPin, OUTPUT);
     Serial.begin(9600); // initialize Serial communication
     while (!Serial);    // wait for the serial port to open
@@ -103,7 +108,6 @@ int count = 0;
 void loop() {
     // read raw accel/gyro measurements from device
     CurieImu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
-    
     // these methods (and a few others) are also available
     //CurieImu.getAcceleration(&ax, &ay, &az);
     //CurieImu.getRotation(&gx, &gy, &gz);
@@ -148,11 +152,13 @@ void loop() {
         for (i = 0; i < 10; i++) {
             duration = 2 * tempo;  // length of note/rest in ms
 
+             lcd.print("SEIZURE DETECTED");
              tone(buzzerPin, 445, 750);
              delay(duration);            // wait for tone to finish
  
         }
     }
+  
     count++;
     //Serial.println(currMovementMag);
     Serial.println(total);
@@ -161,5 +167,5 @@ void loop() {
 //    Serial.println(gz);
      delay(5);
 
-
+ 
 }
