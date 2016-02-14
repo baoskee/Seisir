@@ -120,17 +120,7 @@ void loop() {
     //  Serial.print("\t");
     //  Serial.print(az);
     //  Serial.print("\t");
-    int length = 10; // Modify array length here
-    int XValues[length];
-    int YValues[length];
-    int ZValues[length];
-    for (int i = 0; i < length; i += 1) {
-        XValues[i] = ax;
-        YValues[i] = ay;
-        ZValues[i] = az;
-    }
 
- 
     int pastMovementMag = currMovementMag;
     currMovementMag = abs(ax)+abs(ay)+abs(az);
 
@@ -160,12 +150,12 @@ void loop() {
     }
   
     count++;
-    //Serial.println(currMovementMag);
+//  Serial.println(currMovementMag);
     Serial.println(total);
-//    Serial.println(gx);
-//    Serial.println(gy);
-//    Serial.println(gz);
-     delay(5);
+//  Serial.println(gx);
+//  Serial.println(gy);
+//  Serial.println(gz);
+    delay(5);
 
  
 }
